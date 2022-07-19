@@ -1,8 +1,8 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { ActionTypes } from './common';
+import { AuthActionTypes } from './common';
 
 export const getCurrentUser = createAsyncThunk(
-	ActionTypes.LOAD_CURRENT_USER,
+	AuthActionTypes.LOAD_CURRENT_USER,
 	// To fix any type
 	async (_args, { extra }: any) => {
 		const data = await extra.authService.getCurrentUser();
@@ -11,7 +11,7 @@ export const getCurrentUser = createAsyncThunk(
 );
 
 export const signIn = createAsyncThunk(
-	ActionTypes.SIGN_IN,
+	AuthActionTypes.SIGN_IN,
 	// To fix any type
 	async (
 		{ email, password }: { email: string; password: string },
@@ -26,7 +26,7 @@ export const signIn = createAsyncThunk(
 );
 
 export const signUp = createAsyncThunk(
-	ActionTypes.SIGN_UP,
+	AuthActionTypes.SIGN_UP,
 	// To fix any type
 	async (
 		{
@@ -48,4 +48,4 @@ export const signUp = createAsyncThunk(
 	}
 );
 
-export const signOut = createAction(ActionTypes.SIGN_OUT);
+export const signOut = createAction(AuthActionTypes.SIGN_OUT);
