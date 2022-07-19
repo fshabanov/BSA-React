@@ -1,4 +1,4 @@
-import { HttpMethods } from './../../enums/enums';
+import { HttpMethods } from 'src/enums/enums';
 class Api {
 	_token = localStorage.getItem('token');
 	load(url: string, options?: any) {

@@ -7,5 +7,10 @@ export interface IState {
 	};
 	trips: {
 		trips: ITrip[];
+		isLoading: boolean;
+	};
+	trip: {
+		trip: ITrip | null;
+		isLoading: boolean;
 	};
 }

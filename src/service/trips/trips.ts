@@ -1,4 +1,4 @@
-import { ApiPath, HttpMethods } from './../../enums/enums';
+import { ApiPath, HttpMethods } from 'src/enums/enums';
 import { Api } from '../api/api';
 
 class Trips {
@@ -13,6 +13,12 @@ class Trips {
 
 	getAllTrips() {
 		return this._http.load(this._getUrl(), {
+			method: HttpMethods.GET,
+		});
+	}
+
+	getTripById(id: string) {
+		return this._http.load(this._getUrl(`/${id}`), {
 			method: HttpMethods.GET,
 		});
 	}
