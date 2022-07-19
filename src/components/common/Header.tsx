@@ -4,14 +4,18 @@ import briefcase from 'src/assets/images/briefcase.svg';
 import profile from 'src/assets/images/user.svg';
 import useRouter from 'src/hooks/useRouter';
 import 'src/assets/css/header.css';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from 'src/store/store';
+import { authActions } from 'src/store/actions';
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
-	const { pathname, navigate } = useRouter();
+	const { pathname } = useRouter();
+	const dispatch = useDispatch<AppDispatch>();
 
 	const handleSignOut = () => {
-		navigate('/sign-in');
+		dispatch(authActions.signOut());
 	};
 
 	return (
