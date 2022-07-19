@@ -10,4 +10,5 @@ export enum ApiPath {
 	SIGN_IN = '/sign-in',
 	SIGN_UP = '/sign-up',
 	TRIPS = '/trips',
+	BOOKINGS = '/bookings',
 }

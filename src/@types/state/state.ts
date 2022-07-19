@@ -1,3 +1,4 @@
+import { IBooking } from 'src/@types';
 import { ITrip } from 'src/@types';
 import { IUser } from 'src/@types';
 export interface IState {
@@ -12,5 +13,8 @@ export interface IState {
 	trip: {
 		trip: ITrip | null;
 		isLoading: boolean;
+	};
+	bookings: {
+		bookings: IBooking[];
 	};
 }

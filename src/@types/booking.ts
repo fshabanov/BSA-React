@@ -1,9 +1,5 @@
-export default interface IBooking {
+export default interface IBooking extends IBookingBody {
 	id: string;
-	userId: string;
-	tripId: string;
-	guests: number;
-	date: string;
 	trip: {
 		title: string;
 		duration: number;
@@ -11,4 +7,11 @@ export default interface IBooking {
 	};
 	totalPrice: number;
 	createdAt: string;
+}
+
+export interface IBookingBody {
+	userId: string;
+	tripId: string;
+	guests: number;
+	date: string;
 }

@@ -3,6 +3,6 @@ import { IPayload } from './state/auth/payload';
 import { IExtra } from './store/index';
 import { IUser } from './state/user';
 import ITrip from './trip';
-import IBooking from './booking';
+import IBooking, { IBookingBody } from './booking';
 
-export type { ITrip, IBooking, IUser, IExtra, IPayload, IState };
+export type { ITrip, IBooking, IBookingBody, IUser, IExtra, IPayload, IState };

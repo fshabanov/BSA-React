@@ -30,11 +30,16 @@ class Api {
 			throw new Error(`${status}: ${statusText}`);
 		}
 
+		if (status === 204) {
+			// delete does not return json
+			return null;
+		}
+
 		return response;
 	}
 
-	_parseJSON(response: Response) {
-		return response.json();
+	_parseJSON(response: Response | null) {
+		return response?.json();
 	}
 
 	_throwError(err: Error) {
