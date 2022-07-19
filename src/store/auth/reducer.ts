@@ -1,4 +1,4 @@
-import { IPayload } from './../../@types/state/auth/payload';
+import { IPayload } from 'src/@types';
 import { getCurrentUser, signIn, signUp, signOut } from './actions';
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { IUser } from 'src/@types';
@@ -16,6 +16,7 @@ export const reducer = createReducer(initialState, (builder) => {
 	builder.addCase(signOut, (state) => {
 		state.user = null;
 		state.isLoading = false;
+		localStorage.removeItem('token');
 	});
 	builder.addMatcher(
 		isAnyOf(getCurrentUser.pending, signIn.pending, signUp.pending),
@@ -26,9 +27,9 @@ export const reducer = createReducer(initialState, (builder) => {
 	builder.addMatcher(
 		isAnyOf(signIn.fulfilled, signUp.fulfilled),
 		(state, { payload }: { payload: IPayload }) => {
+			localStorage.setItem('token', payload.token);
 			state.user = payload.user;
 			state.isLoading = false;
-			localStorage.setItem('token', payload.token);
 		}
 	);
 	builder.addMatcher(

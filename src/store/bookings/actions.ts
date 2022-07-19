@@ -1,3 +1,4 @@
+import { signOut } from '../auth/actions';
 import { IBookingBody } from 'src/@types';
 import { BookingActionTypes } from './common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -31,12 +32,19 @@ export const deleteBooking = createAsyncThunk(
 	BookingActionTypes.DELETE,
 	async (
 		id: string,
-		{ extra, rejectWithValue }: { extra: any; rejectWithValue: any }
+		{
+			extra,
+			rejectWithValue,
+			dispatch,
+		}: { extra: any; rejectWithValue: any; dispatch: any }
 	) => {
 		try {
 			await extra.bookingsService.deleteBooking(id);
 			return id;
 		} catch (err: any) {
+			if (err.message === '401') {
+				dispatch(signOut());
+			}
 			return rejectWithValue(err.message);
 		}
 	}

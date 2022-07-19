@@ -2,6 +2,7 @@ import { HttpMethods } from 'src/enums/enums';
 class Api {
 	_token = localStorage.getItem('token');
 	load(url: string, options?: any) {
+		this._token = localStorage.getItem('token');
 		const { method = HttpMethods.GET, payload = null, contentType } = options;
 		const headers = this._getHeaders(contentType);
 		return fetch(url, {
@@ -24,10 +25,10 @@ class Api {
 	}
 
 	_checkStatus(response: Response) {
-		const { ok: isOk, status, statusText } = response;
+		const { ok: isOk, status } = response;
 
 		if (!isOk) {
-			throw new Error(`${status}: ${statusText}`);
+			throw new Error(`${status}`);
 		}
 
 		if (status === 204) {
