@@ -15,13 +15,21 @@ export const signIn = createAsyncThunk(
 	// To fix any type
 	async (
 		{ email, password }: { email: string; password: string },
-		{ extra }: any
+		{ extra, rejectWithValue }: any
 	) => {
-		const { user, token } = await extra.authService.signIn({ email, password });
-		return {
-			user,
-			token,
-		};
+		try {
+			const { user, token } = await extra.authService.signIn({
+				email,
+				password,
+			});
+			return {
+				user,
+				token,
+			};
+		} catch (err: any) {
+			extra.notificationsService.error(`Error ${err.status}`, err.message);
+			throw rejectWithValue(err.message);
+		}
 	}
 );
 
@@ -34,17 +42,22 @@ export const signUp = createAsyncThunk(
 			email,
 			password,
 		}: { fullName: string; email: string; password: string },
-		{ extra }: any
+		{ extra, rejectWithValue }: any
 	) => {
-		const { user, token } = await extra.authService.signUp({
-			fullName,
-			email,
-			password,
-		});
-		return {
-			user,
-			token,
-		};
+		try {
+			const { user, token } = await extra.authService.signUp({
+				fullName,
+				email,
+				password,
+			});
+			return {
+				user,
+				token,
+			};
+		} catch (err: any) {
+			extra.notificationsService.error(`Error ${err.status}`, err.message);
+			throw rejectWithValue(err.message);
+		}
 	}
 );
 

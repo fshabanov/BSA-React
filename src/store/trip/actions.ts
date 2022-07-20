@@ -17,9 +17,8 @@ export const getTripById = createAsyncThunk(
 				trip: await extra.tripsService.getTripById(id),
 			};
 		} catch (err: any) {
-			if (err.message === '401') {
-				dispatch(signOut());
-			}
+			extra.notificationsService.error(`Error ${err.status}`, err.message);
+
 			return rejectWithValue(err.message);
 		}
 	}

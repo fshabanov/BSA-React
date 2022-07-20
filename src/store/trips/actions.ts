@@ -17,9 +17,8 @@ export const getAllTrips = createAsyncThunk(
 				trips: await extra.tripsService.getAllTrips(),
 			};
 		} catch (err: any) {
-			if (err.message === '401') {
-				dispatch(signOut());
-			}
+			extra.notificationsService.error(`Error ${err.status}`, err.message);
+
 			return rejectWithValue(err.message);
 		}
 	}

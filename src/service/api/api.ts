@@ -1,4 +1,5 @@
 import { HttpMethods } from 'src/enums/enums';
+import { ErrorHelper } from 'src/utils/ErrorHelper';
 class Api {
 	_token = localStorage.getItem('token');
 	load(url: string, options?: any) {
@@ -24,16 +25,17 @@ class Api {
 		return headers;
 	}
 
-	_checkStatus(response: Response) {
-		const { ok: isOk, status } = response;
+	async _checkStatus(response: Response) {
+		if (response.status === 204) return null; // Delete does not return JSON
+		if (!response.ok) {
+			const parsedException = await response.json().catch(() => ({
+				message: response.statusText,
+			}));
 
-		if (!isOk) {
-			throw new Error(`${status}`);
-		}
-
-		if (status === 204) {
-			// delete does not return json
-			return null;
+			throw new ErrorHelper({
+				status: response.status,
+				message: parsedException?.message,
+			});
 		}
 
 		return response;

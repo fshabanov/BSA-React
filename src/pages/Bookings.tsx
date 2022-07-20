@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { IBooking, IState } from 'src/@types';
-// import bookings from 'src/data/bookings.json';
 import 'src/assets/css/booking.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from 'src/store/store';
@@ -17,8 +16,6 @@ const Bookings: React.FC = () => {
 
 	const handleDelete = (id: string) => {
 		dispatch(deleteBooking(id));
-		// const newBookings = bookingsToShow.filter((booking) => booking.id !== id);
-		// setBookingsToShow(newBookings);
 	};
 
 	return (

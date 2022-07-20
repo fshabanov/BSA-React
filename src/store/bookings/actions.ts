@@ -5,10 +5,21 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getAllBookings = createAsyncThunk(
 	BookingActionTypes.GET_ALL,
-	async (_args, { extra }: { extra: any }) => {
-		return {
-			bookings: await extra.bookingsService.getAllBookings(),
-		};
+	async (
+		_args,
+		{ extra, rejectWithValue }: { extra: any; rejectWithValue: any }
+	) => {
+		try {
+			const bookings = await extra.bookingsService.getAllBookings();
+			if (!bookings.length)
+				extra.notificationsService.info('You have no bookings');
+			return {
+				bookings,
+			};
+		} catch (err: any) {
+			extra.notificationsService.error(`Error ${err.status}`, err.message);
+			throw rejectWithValue(err.message);
+		}
 	}
 );
 
@@ -19,10 +30,13 @@ export const newBooking = createAsyncThunk(
 		{ extra, rejectWithValue }: { extra: any; rejectWithValue: any }
 	) => {
 		try {
+			const newBooking = await extra.bookingsService.newBooking(booking);
+			extra.notificationsService.success('Booking was created');
 			return {
-				booking: await extra.bookingsService.newBooking(booking),
+				booking: newBooking,
 			};
 		} catch (err: any) {
+			extra.notificationsService.error(`Error ${err.status}`, err.message);
 			return rejectWithValue(err.message);
 		}
 	}
@@ -35,16 +49,14 @@ export const deleteBooking = createAsyncThunk(
 		{
 			extra,
 			rejectWithValue,
-			dispatch,
 		}: { extra: any; rejectWithValue: any; dispatch: any }
 	) => {
 		try {
 			await extra.bookingsService.deleteBooking(id);
 			return id;
 		} catch (err: any) {
-			if (err.message === '401') {
-				dispatch(signOut());
-			}
+			extra.notificationsService.error(`Error ${err.status}`, err.message);
+
 			return rejectWithValue(err.message);
 		}
 	}

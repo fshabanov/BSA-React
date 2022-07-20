@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { auth as authService } from 'src/service/services';
 import { trips as tripsService } from 'src/service/services';
 import { bookings as bookingsService } from 'src/service/services';
+import { notifications as notificationsService } from 'src/service/services';
 import {
 	authReducer,
 	bookingsReducer,
 	tripReducer,
 	tripsReducer,
+	toastr,
 } from './root-reducer';
 
 export const store = configureStore({
@@ -15,6 +17,7 @@ export const store = configureStore({
 		trips: tripsReducer,
 		trip: tripReducer,
 		bookings: bookingsReducer,
+		toastr,
 	},
 	middleware: (getDefaultMiddleware) => {
 		return getDefaultMiddleware({
@@ -23,6 +26,7 @@ export const store = configureStore({
 					authService,
 					tripsService,
 					bookingsService,
+					notificationsService,
 				},
 			},
 		});

@@ -8,6 +8,7 @@ import { AppDispatch } from './store/store';
 import Protected from './components/Protected';
 import { IState } from './@types';
 import Loading from './components/Loading';
+import Toastr from './components/toastr/toastr';
 
 const Footer = React.lazy(() => import('./components/common/Footer'));
 const Header = React.lazy(() => import('./components/common/Header'));
@@ -86,6 +87,7 @@ function App() {
 				</Routes>
 			)}
 			<Footer />
+			<Toastr />
 		</BrowserRouter>
 	);
 }
