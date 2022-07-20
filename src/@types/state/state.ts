@@ -16,5 +16,11 @@ export interface IState {
 	};
 	bookings: {
 		bookings: IBooking[];
+		isLoading: boolean;
+	};
+	filter: {
+		search: string;
+		duration: string;
+		level: string;
 	};
 }

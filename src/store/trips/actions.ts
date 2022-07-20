@@ -1,4 +1,4 @@
-import { IExtra } from 'src/@types/store/extra';
+import { IExtra } from 'src/@types';
 import { ITrip } from 'src/@types';
 import { TripsActionTypes } from './common';
 import { createAsyncThunk } from '@reduxjs/toolkit';

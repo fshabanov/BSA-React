@@ -1,4 +1,4 @@
-export default interface IBooking extends IBookingBody {
+export interface IBooking extends IBookingBody {
 	id: string;
 	trip: {
 		title: string;

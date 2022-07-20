@@ -1,4 +1,4 @@
-import { IExtra } from './../../@types/store/extra';
+import { IExtra } from 'src/@types';
 import { IBooking, IBookingBody } from 'src/@types';
 import { BookingActionTypes } from './common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -19,7 +19,7 @@ export const getAllBookings = createAsyncThunk<
 	}
 >(BookingActionTypes.GET_ALL, async (_args, { extra, rejectWithValue }) => {
 	try {
-		const bookings: IBooking[] = await extra.bookingsService.getAllBookings();
+		const bookings = await extra.bookingsService.getAllBookings();
 		if (!bookings.length)
 			extra.notificationsService.info(
 				'You have no bookings',

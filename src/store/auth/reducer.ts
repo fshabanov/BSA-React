@@ -1,9 +1,13 @@
-import { IPayload } from 'src/@types';
 import { getCurrentUser, signIn, signUp, signOut } from './actions';
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { IUser } from 'src/@types';
 
-const initialState: { user: IUser | null; isLoading: boolean } = {
+interface UserState {
+	user: IUser | null;
+	isLoading: boolean;
+}
+
+const initialState: UserState = {
 	user: null,
 	isLoading: true,
 };

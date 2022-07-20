@@ -29,14 +29,6 @@ const TripPage: React.FC = () => {
 		}
 	}, [dispatch, query.id]);
 
-	// When trip with id doesn't exist, redirect to home
-
-	// useEffect(() => {
-	// 	if (!trip && !isLoading) {
-	// 		navigate('/');
-	// 	}
-	// }, [navigate, trip, isLoading]);
-
 	const handleOpenModal = () => setShowModal(true);
 	const handleCloseModal = () => setShowModal(false);
 
@@ -49,6 +41,8 @@ const TripPage: React.FC = () => {
 					<main className='trip-page'>
 						<h1 className='visually-hidden'>Travel App</h1>
 						<div className='trip'>
+							{/* disabled and didn't change alt, because tests may depend on it */}
+							{/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
 							<img src={trip.image} className='trip__img' alt='trip image' />
 							<div className='trip__content'>
 								<div className='trip-info'>

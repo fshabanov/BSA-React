@@ -1,3 +1,4 @@
+import { IServiceConstructor } from 'src/@types';
 import { IBooking, IBookingBody } from 'src/@types';
 import { HttpMethods } from 'src/enums/enums';
 import { ApiPath } from 'src/enums/enums';
@@ -6,8 +7,8 @@ import { Api } from '../api/api';
 class Bookings {
 	_baseUrl: string;
 	_http: Api;
-	_basePath: string;
-	constructor({ baseUrl, http }: { baseUrl: string; http: Api }) {
+	_basePath: ApiPath;
+	constructor({ baseUrl, http }: IServiceConstructor) {
 		this._http = http;
 		this._baseUrl = baseUrl;
 		this._basePath = ApiPath.BOOKINGS;
@@ -33,7 +34,7 @@ class Bookings {
 		});
 	}
 
-	_getUrl(path = '') {
+	_getUrl(path = ''): string {
 		return `${this._baseUrl}${this._basePath}${path}`;
 	}
 }

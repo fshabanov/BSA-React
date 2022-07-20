@@ -12,8 +12,10 @@ interface Props {
 
 const NewTrip: React.FC<Props> = ({ trip, onClose }) => {
 	const [numOfGuests, setNumOfGuests] = useState(1);
-	const todaysDate = new Date().toISOString().split('T')[0];
-	const [date, setDate] = useState(todaysDate);
+	let tomorrowsDate = new Date();
+	tomorrowsDate.setDate(tomorrowsDate.getDate() + 1);
+	tomorrowsDate.setHours(0, 0, 0, 0);
+	const [date, setDate] = useState(tomorrowsDate.toISOString().split('T')[0]);
 	const { title, price, duration, level, id } = trip;
 
 	const { user } = useSelector((state: IState) => state.auth);
@@ -26,8 +28,11 @@ const NewTrip: React.FC<Props> = ({ trip, onClose }) => {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		console.log(new Date(date));
+		console.log(new Date(tomorrowsDate));
+
 		if (
-			new Date(date).getTime() >= new Date(todaysDate).getTime() &&
+			new Date(date).getTime() >= new Date(tomorrowsDate).getTime() &&
 			numOfGuests > 0 &&
 			numOfGuests <= 10
 		) {
@@ -69,7 +74,7 @@ const NewTrip: React.FC<Props> = ({ trip, onClose }) => {
 						required
 						value={date}
 						onChange={(e) => setDate(e.target.value)}
-						min={todaysDate}
+						min={tomorrowsDate.toISOString().split('T')[0]}
 					/>
 				</label>
 				<label className='trip-popup__input input'>

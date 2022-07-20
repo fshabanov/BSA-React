@@ -7,9 +7,15 @@ import { Trips } from './trips/trips';
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL as string;
 
 const api = new Api();
-const auth = new Auth({ baseUrl: REACT_APP_API_URL, http: api });
-const trips = new Trips({ baseUrl: REACT_APP_API_URL, http: api });
-const bookings = new Bookings({ baseUrl: REACT_APP_API_URL, http: api });
+
+const serviceData = {
+	baseUrl: REACT_APP_API_URL,
+	http: api,
+};
+
+const auth = new Auth(serviceData);
+const trips = new Trips(serviceData);
+const bookings = new Bookings(serviceData);
 const notifications = new Notification();
 
 export { api, auth, trips, bookings, notifications };

@@ -2,20 +2,24 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { IState, ITrip } from 'src/@types';
-// import trips from "src/data/trips.json";
 import filterDuration from 'src/helpers/filterDuration';
 import Trip from './Trip';
 import 'src/assets/css/trips.css';
 import { useSelector } from 'react-redux';
+import Loading from '../Loading';
 
-interface Props {
-	search: string;
-	duration: string;
-	level: string;
-}
-
-const Trips: React.FC<Props> = ({ duration, level, search }) => {
-	const { trips } = useSelector((state: IState) => state.trips);
+const Trips: React.FC = () => {
+	const {
+		trips: { trips, isLoading },
+		search,
+		duration,
+		level,
+	} = useSelector((state: IState) => ({
+		trips: state.trips,
+		search: state.filter.search,
+		duration: state.filter.duration,
+		level: state.filter.level,
+	}));
 
 	const [filteredTrips, setFilteredTrips] = useState<ITrip[]>(trips);
 
@@ -33,11 +37,15 @@ const Trips: React.FC<Props> = ({ duration, level, search }) => {
 	return (
 		<section className='trips'>
 			<h2 className='visually-hidden'>Trips List</h2>
-			<ul className='trip-list'>
-				{filteredTrips.map((trip) => (
-					<Trip trip={trip} key={trip.id} />
-				))}
-			</ul>
+			{isLoading ? (
+				<Loading />
+			) : (
+				<ul className='trip-list'>
+					{filteredTrips.map((trip) => (
+						<Trip trip={trip} key={trip.id} />
+					))}
+				</ul>
+			)}
 		</section>
 	);
 };

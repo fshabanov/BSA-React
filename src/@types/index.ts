@@ -1,8 +1,18 @@
+import { IServiceConstructor } from './service/serviceConstructor';
+import { IAuthBody } from './authBody';
 import { IState } from './state/state';
-import { IPayload } from './state/auth/payload';
 import { IExtra } from './store/index';
 import { IUser } from './state/user';
-import ITrip from './trip';
-import IBooking, { IBookingBody } from './booking';
+import ITrip from './state/trip';
+import { IBookingBody, IBooking } from './state/booking';
 
-export type { ITrip, IBooking, IBookingBody, IUser, IExtra, IPayload, IState };
+export type {
+	ITrip,
+	IBooking,
+	IBookingBody,
+	IUser,
+	IExtra,
+	IState,
+	IAuthBody,
+	IServiceConstructor,
+};

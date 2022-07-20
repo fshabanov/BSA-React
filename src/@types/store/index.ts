@@ -1,5 +1,3 @@
-import { Auth } from 'src/service/auth/auth';
+import { IExtra } from './extra';
 
-export interface IExtra {
-	authService: Auth;
-}
+export type { IExtra };

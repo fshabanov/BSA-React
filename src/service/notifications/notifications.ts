@@ -10,7 +10,7 @@ class Notification {
 		title: string,
 		message: string,
 		option?: BasicToastrOptions | undefined
-	) {
+	): void {
 		this._instance.error(title, message, option);
 	}
 
@@ -18,7 +18,7 @@ class Notification {
 		title: string,
 		message: string,
 		option?: BasicToastrOptions | undefined
-	) {
+	): void {
 		this._instance.success(title, message, option);
 	}
 
@@ -26,7 +26,7 @@ class Notification {
 		title: string,
 		message: string,
 		option?: BasicToastrOptions | undefined
-	) {
+	): void {
 		this._instance.info(title, message, option);
 	}
 }

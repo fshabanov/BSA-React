@@ -24,7 +24,6 @@ const SignUp: React.FC = () => {
 			return;
 		}
 		dispatch(authActions.signUp({ fullName: name, email, password }));
-		// navigate('/');
 	};
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		setName(e.target.value);

@@ -1,4 +1,5 @@
-import { IExtra } from 'src/@types/store/extra';
+import { IAuthBody } from 'src/@types';
+import { IExtra } from 'src/@types';
 import { IUser } from 'src/@types';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthActionTypes } from './common';
@@ -6,15 +7,6 @@ import { AuthActionTypes } from './common';
 interface IAuthPayload {
 	user: IUser;
 	token?: string;
-}
-
-interface ISignIn {
-	email: string;
-	password: string;
-}
-
-interface ISignUp extends ISignIn {
-	fullName: string;
 }
 
 export const getCurrentUser = createAsyncThunk<
@@ -34,7 +26,7 @@ export const getCurrentUser = createAsyncThunk<
 
 export const signIn = createAsyncThunk<
 	IAuthPayload,
-	ISignIn,
+	IAuthBody,
 	{
 		extra: IExtra;
 	}
@@ -59,21 +51,14 @@ export const signIn = createAsyncThunk<
 
 export const signUp = createAsyncThunk<
 	IAuthPayload,
-	ISignUp,
+	IAuthBody,
 	{
 		extra: IExtra;
 	}
 >(
 	AuthActionTypes.SIGN_UP,
 	// To fix any type
-	async (
-		{
-			fullName,
-			email,
-			password,
-		}: { fullName: string; email: string; password: string },
-		{ extra, rejectWithValue }: any
-	) => {
+	async ({ fullName, email, password }, { extra, rejectWithValue }) => {
 		try {
 			const { user, token } = await extra.authService.signUp({
 				fullName,

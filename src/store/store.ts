@@ -9,6 +9,7 @@ import {
 	tripReducer,
 	tripsReducer,
 	toastr,
+	filterReducer,
 } from './root-reducer';
 
 export const store = configureStore({
@@ -18,6 +19,7 @@ export const store = configureStore({
 		trip: tripReducer,
 		bookings: bookingsReducer,
 		toastr,
+		filter: filterReducer,
 	},
 	middleware: (getDefaultMiddleware) => {
 		return getDefaultMiddleware({

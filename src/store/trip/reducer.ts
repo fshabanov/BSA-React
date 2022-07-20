@@ -2,7 +2,12 @@ import { ITrip } from 'src/@types';
 import { getTripById } from './actions';
 import { createReducer } from '@reduxjs/toolkit';
 
-const initialState: { trip: ITrip | null; isLoading: boolean } = {
+interface ITripState {
+	trip: ITrip | null;
+	isLoading: boolean;
+}
+
+const initialState: ITripState = {
 	trip: null,
 	isLoading: true,
 };

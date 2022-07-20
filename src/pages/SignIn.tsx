@@ -22,7 +22,6 @@ const SignIn: React.FC = () => {
 			return;
 		}
 		dispatch(authActions.signIn({ email, password }));
-		// navigate("/");
 	};
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
