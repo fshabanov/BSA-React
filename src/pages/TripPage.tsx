@@ -8,16 +8,13 @@ import 'src/assets/css/tripPage.css';
 import NewTrip from 'src/components/trip/NewTrip';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from 'src/store/store';
-import { authActions, tripActions } from 'src/store/actions';
+import { tripActions } from 'src/store/actions';
 import Loading from 'src/components/Loading';
-import { ApiPath } from 'src/enums/enums';
-
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL as string;
 
 const TripPage: React.FC = () => {
 	const [showModal, setShowModal] = useState(false);
 
-	const { query, navigate } = useRouter();
+	const { query } = useRouter();
 
 	const { trip, isLoading } = useSelector((state: IState) => state.trip);
 

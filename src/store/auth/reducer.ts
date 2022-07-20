@@ -26,8 +26,8 @@ export const reducer = createReducer(initialState, (builder) => {
 	);
 	builder.addMatcher(
 		isAnyOf(signIn.fulfilled, signUp.fulfilled),
-		(state, { payload }: { payload: IPayload }) => {
-			localStorage.setItem('token', payload.token);
+		(state, { payload }) => {
+			localStorage.setItem('token', payload.token || '');
 			state.user = payload.user;
 			state.isLoading = false;
 		}

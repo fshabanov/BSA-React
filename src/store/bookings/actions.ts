@@ -1,63 +1,71 @@
-import { signOut } from '../auth/actions';
-import { IBookingBody } from 'src/@types';
+import { IExtra } from './../../@types/store/extra';
+import { IBooking, IBookingBody } from 'src/@types';
 import { BookingActionTypes } from './common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const getAllBookings = createAsyncThunk(
-	BookingActionTypes.GET_ALL,
-	async (
-		_args,
-		{ extra, rejectWithValue }: { extra: any; rejectWithValue: any }
-	) => {
-		try {
-			const bookings = await extra.bookingsService.getAllBookings();
-			if (!bookings.length)
-				extra.notificationsService.info('You have no bookings');
-			return {
-				bookings,
-			};
-		} catch (err: any) {
-			extra.notificationsService.error(`Error ${err.status}`, err.message);
-			throw rejectWithValue(err.message);
-		}
-	}
-);
+interface IBookingsReturn {
+	bookings: IBooking[];
+}
 
-export const newBooking = createAsyncThunk(
-	BookingActionTypes.CREATE,
-	async (
-		booking: IBookingBody,
-		{ extra, rejectWithValue }: { extra: any; rejectWithValue: any }
-	) => {
-		try {
-			const newBooking = await extra.bookingsService.newBooking(booking);
-			extra.notificationsService.success('Booking was created');
-			return {
-				booking: newBooking,
-			};
-		} catch (err: any) {
-			extra.notificationsService.error(`Error ${err.status}`, err.message);
-			return rejectWithValue(err.message);
-		}
-	}
-);
+interface IBookingReturn {
+	booking: IBooking;
+}
 
-export const deleteBooking = createAsyncThunk(
-	BookingActionTypes.DELETE,
-	async (
-		id: string,
-		{
-			extra,
-			rejectWithValue,
-		}: { extra: any; rejectWithValue: any; dispatch: any }
-	) => {
-		try {
-			await extra.bookingsService.deleteBooking(id);
-			return id;
-		} catch (err: any) {
-			extra.notificationsService.error(`Error ${err.status}`, err.message);
-
-			return rejectWithValue(err.message);
-		}
+export const getAllBookings = createAsyncThunk<
+	IBookingsReturn,
+	void,
+	{
+		extra: IExtra;
 	}
-);
+>(BookingActionTypes.GET_ALL, async (_args, { extra, rejectWithValue }) => {
+	try {
+		const bookings: IBooking[] = await extra.bookingsService.getAllBookings();
+		if (!bookings.length)
+			extra.notificationsService.info(
+				'You have no bookings',
+				'You have not booked any trip yet'
+			);
+		return {
+			bookings,
+		};
+	} catch (err: any) {
+		extra.notificationsService.error(`Error ${err.status}`, err.message);
+		throw rejectWithValue(err.message);
+	}
+});
+
+export const newBooking = createAsyncThunk<
+	IBookingReturn,
+	IBookingBody,
+	{
+		extra: IExtra;
+	}
+>(BookingActionTypes.CREATE, async (booking, { extra, rejectWithValue }) => {
+	try {
+		const newBooking = await extra.bookingsService.newBooking(booking);
+		extra.notificationsService.success('Success', 'Booking was created');
+		return {
+			booking: newBooking,
+		};
+	} catch (err: any) {
+		extra.notificationsService.error(`Error ${err.status}`, err.message);
+		throw rejectWithValue(err.message);
+	}
+});
+
+export const deleteBooking = createAsyncThunk<
+	string,
+	string,
+	{
+		extra: IExtra;
+	}
+>(BookingActionTypes.DELETE, async (id, { extra, rejectWithValue }) => {
+	try {
+		await extra.bookingsService.deleteBooking(id);
+		return id;
+	} catch (err: any) {
+		extra.notificationsService.error(`Error ${err.status}`, err.message);
+
+		throw rejectWithValue(err.message);
+	}
+});

@@ -1,4 +1,4 @@
-import { IBookingBody } from 'src/@types';
+import { IBooking, IBookingBody } from 'src/@types';
 import { HttpMethods } from 'src/enums/enums';
 import { ApiPath } from 'src/enums/enums';
 import { Api } from '../api/api';
@@ -13,13 +13,13 @@ class Bookings {
 		this._basePath = ApiPath.BOOKINGS;
 	}
 
-	getAllBookings() {
+	getAllBookings(): Promise<IBooking[]> {
 		return this._http.load(this._getUrl(), {
 			method: HttpMethods.GET,
 		});
 	}
 
-	newBooking(booking: IBookingBody) {
+	newBooking(booking: IBookingBody): Promise<IBooking> {
 		return this._http.load(this._getUrl(), {
 			method: HttpMethods.POST,
 			payload: JSON.stringify(booking),
@@ -27,7 +27,7 @@ class Bookings {
 		});
 	}
 
-	deleteBooking(id: string) {
+	deleteBooking(id: string): Promise<void> {
 		return this._http.load(this._getUrl(`/${id}`), {
 			method: HttpMethods.DELETE,
 		});

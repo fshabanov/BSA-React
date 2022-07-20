@@ -9,7 +9,7 @@ class Notification {
 	error(
 		title: string,
 		message: string,
-		option: BasicToastrOptions | undefined
+		option?: BasicToastrOptions | undefined
 	) {
 		this._instance.error(title, message, option);
 	}
@@ -17,12 +17,16 @@ class Notification {
 	success(
 		title: string,
 		message: string,
-		option: BasicToastrOptions | undefined
+		option?: BasicToastrOptions | undefined
 	) {
 		this._instance.success(title, message, option);
 	}
 
-	info(title: string, message: string, option: BasicToastrOptions | undefined) {
+	info(
+		title: string,
+		message: string,
+		option?: BasicToastrOptions | undefined
+	) {
 		this._instance.info(title, message, option);
 	}
 }
