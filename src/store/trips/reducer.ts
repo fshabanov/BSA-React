@@ -1,11 +1,6 @@
-import { ITrip } from 'src/@types';
 import { getAllTrips } from './actions';
 import { createReducer } from '@reduxjs/toolkit';
-
-interface ITripsState {
-	trips: ITrip[];
-	isLoading: boolean;
-}
+import { ITripsState } from 'src/@types';
 
 const initialState: ITripsState = {
 	trips: [],
@@ -20,8 +15,7 @@ export const reducer = createReducer(initialState, (builder) => {
 		state.trips = payload.trips;
 		state.isLoading = false;
 	});
-	builder.addCase(getAllTrips.rejected, (state, { payload }) => {
-		console.log(payload);
+	builder.addCase(getAllTrips.rejected, (state) => {
 		state.isLoading = false;
 	});
 });

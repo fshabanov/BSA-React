@@ -21,7 +21,6 @@ const Filter: React.FC = () => {
 	};
 
 	const handleLevelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		console.log(e.target.value);
 		dispatch(filterActions.setLevel(e.target.value));
 	};
 

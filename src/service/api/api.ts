@@ -53,7 +53,6 @@ class Api {
 	}
 
 	_throwError(err: Error): never {
-		console.log(err);
 		throw err;
 	}
 }

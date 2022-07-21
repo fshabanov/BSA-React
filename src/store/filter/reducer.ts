@@ -1,7 +1,8 @@
+import { IFilterState } from 'src/@types/';
 import { setSearch, setDuration, setLevel } from './actions';
 import { createReducer } from '@reduxjs/toolkit';
 
-const initialState = {
+const initialState: IFilterState = {
 	search: '',
 	duration: '',
 	level: '',

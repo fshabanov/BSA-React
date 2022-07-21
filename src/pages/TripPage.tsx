@@ -21,12 +21,7 @@ const TripPage: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 
 	useEffect(() => {
-		try {
-			dispatch(tripActions.getTripById(query.id as string));
-		} catch (err) {
-			alert(err);
-			console.log(err);
-		}
+		dispatch(tripActions.getTripById(query.id as string));
 	}, [dispatch, query.id]);
 
 	const handleOpenModal = () => setShowModal(true);

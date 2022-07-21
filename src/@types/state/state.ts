@@ -1,26 +1,13 @@
-import { IBooking } from 'src/@types';
-import { ITrip } from 'src/@types';
-import { IUser } from 'src/@types';
+import { IFilterState } from './filterState';
+import { IBookingsState } from './bookingsState';
+import { ITripState } from './tripState';
+import { ITripsState } from './tripsState';
+import { IAuthState } from './authState';
+
 export interface IState {
-	auth: {
-		user: IUser | null;
-		isLoading: boolean;
-	};
-	trips: {
-		trips: ITrip[];
-		isLoading: boolean;
-	};
-	trip: {
-		trip: ITrip | null;
-		isLoading: boolean;
-	};
-	bookings: {
-		bookings: IBooking[];
-		isLoading: boolean;
-	};
-	filter: {
-		search: string;
-		duration: string;
-		level: string;
-	};
+	auth: IAuthState;
+	trips: ITripsState;
+	trip: ITripState;
+	bookings: IBookingsState;
+	filter: IFilterState;
 }

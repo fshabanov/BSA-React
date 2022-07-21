@@ -19,7 +19,7 @@ export const getAllBookings = createAsyncThunk<
 	}
 >(BookingActionTypes.GET_ALL, async (_args, { extra, rejectWithValue }) => {
 	try {
-		const bookings = await extra.bookingsService.getAllBookings();
+		const bookings: IBooking[] = await extra.bookingsService.getAllBookings();
 		if (!bookings.length)
 			extra.notificationsService.info(
 				'You have no bookings',

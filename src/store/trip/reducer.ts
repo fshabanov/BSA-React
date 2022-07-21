@@ -1,11 +1,6 @@
-import { ITrip } from 'src/@types';
+import { ITripState } from 'src/@types';
 import { getTripById } from './actions';
 import { createReducer } from '@reduxjs/toolkit';
-
-interface ITripState {
-	trip: ITrip | null;
-	isLoading: boolean;
-}
 
 const initialState: ITripState = {
 	trip: null,

@@ -28,8 +28,6 @@ const NewTrip: React.FC<Props> = ({ trip, onClose }) => {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(new Date(date));
-		console.log(new Date(tomorrowsDate));
 
 		if (
 			new Date(date).getTime() >= new Date(tomorrowsDate).getTime() &&

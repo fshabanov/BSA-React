@@ -1,8 +1,8 @@
+import { IBookingsState } from 'src/@types';
 import { deleteBooking, getAllBookings, newBooking } from './actions';
-import { IBooking } from 'src/@types';
 import { createReducer } from '@reduxjs/toolkit';
 
-const initialState: { bookings: IBooking[]; isLoading: boolean } = {
+const initialState: IBookingsState = {
 	bookings: [],
 	isLoading: true,
 };

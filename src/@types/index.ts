@@ -1,10 +1,19 @@
+import {
+	IBooking,
+	IBookingBody,
+	IAuthState,
+	IState,
+	ITrip,
+	IUser,
+	ITripState,
+	IBookingsState,
+	IFilterState,
+	ITripsState,
+} from './state';
+
 import { IServiceConstructor } from './service/serviceConstructor';
 import { IAuthBody } from './authBody';
-import { IState } from './state/state';
 import { IExtra } from './store/index';
-import { IUser } from './state/user';
-import ITrip from './state/trip';
-import { IBookingBody, IBooking } from './state/booking';
 
 export type {
 	ITrip,
@@ -15,4 +24,9 @@ export type {
 	IState,
 	IAuthBody,
 	IServiceConstructor,
+	IAuthState,
+	ITripState,
+	ITripsState,
+	IBookingsState,
+	IFilterState,
 };
