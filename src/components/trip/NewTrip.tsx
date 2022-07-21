@@ -13,8 +13,8 @@ interface Props {
 const NewTrip: React.FC<Props> = ({ trip, onClose }) => {
 	const [numOfGuests, setNumOfGuests] = useState(1);
 	let tomorrowsDate = new Date();
-	tomorrowsDate.setDate(tomorrowsDate.getDate() + 1);
-	tomorrowsDate.setHours(0, 0, 0, 0);
+	tomorrowsDate.setUTCDate(tomorrowsDate.getUTCDate() + 1);
+	tomorrowsDate.setUTCHours(0, 0, 0, 0);
 	const [date, setDate] = useState(tomorrowsDate.toISOString().split('T')[0]);
 	const { title, price, duration, level, id } = trip;
 
