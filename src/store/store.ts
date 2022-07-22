@@ -12,6 +12,11 @@ import {
 	filterReducer,
 } from './root-reducer';
 
+import createSagaMiddleware from 'redux-saga';
+import { rootSaga } from './root-saga';
+
+const sagaMiddleware = createSagaMiddleware();
+
 export const store = configureStore({
 	reducer: {
 		auth: authReducer,
@@ -31,8 +36,11 @@ export const store = configureStore({
 					notificationsService,
 				},
 			},
-		});
+			serializableCheck: false,
+		}).concat(sagaMiddleware);
 	},
 });
+
+sagaMiddleware.run(rootSaga);
 
 export type AppDispatch = typeof store.dispatch;

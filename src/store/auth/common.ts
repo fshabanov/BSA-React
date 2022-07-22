@@ -4,3 +4,8 @@ export enum AuthActionTypes {
 	SIGN_OUT = 'auth/sign-out',
 	SIGN_UP = 'auth/sign-up',
 }
+
+export enum ActionStatus {
+	FULFILLED = 'fulfilled',
+	REJECTED = 'rejected',
+}

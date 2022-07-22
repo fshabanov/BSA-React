@@ -23,7 +23,7 @@ function App() {
 	const { user, isLoading } = useSelector((state: IState) => state.auth);
 
 	useEffect(() => {
-		dispatch(authActions.getCurrentUser());
+		dispatch(authActions.getUser());
 	}, [dispatch]);
 
 	return (

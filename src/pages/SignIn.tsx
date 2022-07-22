@@ -21,7 +21,7 @@ const SignIn: React.FC = () => {
 			setEmailError('Invalid email');
 			return;
 		}
-		dispatch(authActions.signIn({ email, password }));
+		dispatch(authActions.signInAction({ email, password }));
 	};
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {

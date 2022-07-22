@@ -23,7 +23,7 @@ const SignUp: React.FC = () => {
 			setEmailError('Invalid email');
 			return;
 		}
-		dispatch(authActions.signUp({ fullName: name, email, password }));
+		dispatch(authActions.signUpAction({ fullName: name, email, password }));
 	};
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		setName(e.target.value);
