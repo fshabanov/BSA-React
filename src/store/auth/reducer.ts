@@ -8,15 +8,6 @@ const initialState: IAuthState = {
 };
 
 export const reducer = createReducer(initialState, (builder) => {
-	builder.addCase(getCurrentUser.fulfilled, (state, { payload }) => {
-		state.user = payload.user;
-		state.isLoading = false;
-	});
-	builder.addCase(signOut, (state) => {
-		state.user = null;
-		state.isLoading = false;
-		localStorage.removeItem('token');
-	});
 	builder.addMatcher(
 		isAnyOf(getCurrentUser.pending, signIn.pending, signUp.pending),
 		(state) => {
@@ -24,9 +15,13 @@ export const reducer = createReducer(initialState, (builder) => {
 		}
 	);
 	builder.addMatcher(
-		isAnyOf(signIn.fulfilled, signUp.fulfilled),
+		isAnyOf(
+			signIn.fulfilled,
+			signUp.fulfilled,
+			getCurrentUser.fulfilled,
+			signOut.fulfilled
+		),
 		(state, { payload }) => {
-			localStorage.setItem('token', payload.token || '');
 			state.user = payload.user;
 			state.isLoading = false;
 		}

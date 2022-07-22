@@ -1,11 +1,11 @@
 import { IAuthBody } from 'src/@types';
 import { IExtra } from 'src/@types';
 import { IUser } from 'src/@types';
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthActionTypes } from './common';
 
 interface IAuthPayload {
-	user: IUser;
+	user: IUser | null;
 	token?: string;
 }
 
@@ -38,6 +38,7 @@ export const signIn = createAsyncThunk<
 				email,
 				password,
 			});
+			localStorage.setItem('token', token);
 			return {
 				user,
 				token,
@@ -65,6 +66,7 @@ export const signUp = createAsyncThunk<
 				email,
 				password,
 			});
+			localStorage.setItem('token', token);
 			return {
 				user,
 				token,
@@ -76,4 +78,12 @@ export const signUp = createAsyncThunk<
 	}
 );
 
-export const signOut = createAction(AuthActionTypes.SIGN_OUT);
+export const signOut = createAsyncThunk<IAuthPayload, void>(
+	AuthActionTypes.SIGN_OUT,
+	() => {
+		localStorage.removeItem('token');
+		return {
+			user: null,
+		};
+	}
+);
