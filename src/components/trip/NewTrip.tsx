@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IState, ITrip } from 'src/@types';
 import 'src/assets/css/newTrip.css';
-import { newBooking } from 'src/store/bookings/actions';
+import { bookingsActions } from 'src/store/actions';
 import { AppDispatch } from 'src/store/store';
 
 interface Props {
@@ -35,7 +35,7 @@ const NewTrip: React.FC<Props> = ({ trip, onClose }) => {
 			numOfGuests <= 10
 		) {
 			dispatch(
-				newBooking({
+				bookingsActions.newBookingAction({
 					tripId: id,
 					date,
 					guests: numOfGuests,

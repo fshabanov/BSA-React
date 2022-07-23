@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { signUpAction } from './actions';
-import { takeEvery } from 'redux-saga/effects';
+import { takeLeading } from 'redux-saga/effects';
 
 import { getUser, signInAction } from './actions';
 import { ActionStatus } from './common';
@@ -18,10 +18,6 @@ function* getAuthState() {
 			payload: user,
 		});
 	} catch (err) {
-		yield call(
-			[notificationService, notificationService.error],
-			[err.status, err.message]
-		);
 		yield put({
 			type: `${getUser.type}/${ActionStatus.REJECTED}`,
 		});
@@ -76,15 +72,15 @@ function* signUp({ payload }) {
 }
 
 function* watchAuthState() {
-	yield takeEvery(getUser.type, getAuthState);
+	yield takeLeading(getUser.type, getAuthState);
 }
 
 function* watchSignIn() {
-	yield takeEvery(signInAction.type, signIn);
+	yield takeLeading(signInAction.type, signIn);
 }
 
 function* watchSignUp() {
-	yield takeEvery(signUpAction.type, signUp);
+	yield takeLeading(signUpAction.type, signUp);
 }
 
 function* auth() {

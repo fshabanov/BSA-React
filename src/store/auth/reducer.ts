@@ -1,13 +1,5 @@
 import { ActionStatus } from './common';
-import {
-	// getCurrentUser,
-	// signIn,
-	// signUp,
-	signOut,
-	getUser,
-	signInAction,
-	signUpAction,
-} from './actions';
+import { signOut, getUser, signInAction, signUpAction } from './actions';
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { IAuthState } from 'src/@types';
 
@@ -68,16 +60,8 @@ export const reducer = createReducer(initialState, (builder) => {
 		state.user = null;
 	});
 
-	builder.addMatcher(
-		isAnyOf(
-			// signIn.fulfilled,
-			// signUp.fulfilled,
-			// getCurrentUser.fulfilled,
-			signOut.fulfilled
-		),
-		(state, { payload }) => {
-			state.user = payload.user;
-			state.isLoading = false;
-		}
-	);
+	builder.addMatcher(isAnyOf(signOut.fulfilled), (state, { payload }) => {
+		state.user = payload.user;
+		state.isLoading = false;
+	});
 });

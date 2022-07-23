@@ -3,7 +3,7 @@ import { IBooking, IState } from 'src/@types';
 import 'src/assets/css/booking.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from 'src/store/store';
-import { deleteBooking, getAllBookings } from 'src/store/bookings/actions';
+import { bookingsActions } from 'src/store/actions';
 import Loading from 'src/components/Loading';
 
 const Bookings: React.FC = () => {
@@ -14,11 +14,11 @@ const Bookings: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 
 	useEffect(() => {
-		dispatch(getAllBookings());
+		dispatch(bookingsActions.getAllBookingsAction());
 	}, [dispatch]);
 
 	const handleDelete = (id: string) => {
-		dispatch(deleteBooking(id));
+		dispatch(bookingsActions.deleteBookingAction(id));
 	};
 
 	return (

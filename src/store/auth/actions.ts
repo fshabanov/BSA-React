@@ -3,7 +3,7 @@ import { IUser } from 'src/@types';
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { AuthActionTypes } from './common';
 
-interface IAuthPayload {
+export interface IAuthPayload {
 	user: IUser | null;
 	token?: string;
 }
