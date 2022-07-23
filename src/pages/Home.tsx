@@ -9,7 +9,7 @@ const Home: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 
 	useEffect(() => {
-		dispatch(tripsActions.getAllTrips());
+		dispatch(tripsActions.getAllTripsAction());
 	}, [dispatch]);
 
 	return (

@@ -1,6 +1,7 @@
 import { ITripState } from 'src/@types';
-import { getTripById } from './actions';
+import { getTripByIdAction } from './actions';
 import { createReducer } from '@reduxjs/toolkit';
+import { ActionStatus } from '../auth/common';
 
 const initialState: ITripState = {
 	trip: null,
@@ -8,15 +9,23 @@ const initialState: ITripState = {
 };
 
 export const reducer = createReducer(initialState, (builder) => {
-	builder.addCase(getTripById.pending, (state) => {
+	builder.addCase(getTripByIdAction.type, (state) => {
 		state.isLoading = true;
 	});
-	builder.addCase(getTripById.fulfilled, (state, { payload }) => {
-		state.trip = payload.trip;
-		state.isLoading = false;
-	});
-	builder.addCase(getTripById.rejected, (state) => {
-		state.isLoading = false;
-		state.trip = null;
-	});
+
+	builder.addCase(
+		`${getTripByIdAction.type}/${ActionStatus.FULFILLED}`,
+		// @ts-ignore
+		(state, { payload }) => {
+			state.trip = payload;
+			state.isLoading = false;
+		}
+	);
+	builder.addCase(
+		`${getTripByIdAction.type}/${ActionStatus.REJECTED}`,
+		(state) => {
+			state.trip = null;
+			state.isLoading = false;
+		}
+	);
 });
